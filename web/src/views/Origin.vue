@@ -1,28 +1,28 @@
 <template>
-  <div class="text-center pt-12">
-    <h1 class="text-2xl font-bold mb-8">
+  <div class="pt-12 text-center">
+    <h1 class="mb-8 text-2xl font-bold">
       Bridge from {{originNetwork}} to {{destinationNetwork}}
     </h1>
 
     <p>
-      This bridge allows you to send ChainstackDollars (D-CHSD) from {{originNetwork}} to {{destinationNetwork}}
+      This bridge allows you to send BONE (BONE) from {{originNetwork}} to {{destinationNetwork}}
     </p>
 
     <WalletConnect
       class="my-4"
       :targetNetwork="originNetwork"
       :targetNetworkId="originNetworkId"
-      :currency="ETH"
+      :currency="MINTME"
       :decimals="18"
     />
 
-    <form class="w-96 mt-8 mx-auto">
+    <form class="mx-auto mt-8 w-96">
       <label for="price" class="block mb-2 font-medium text-gray-700"
-        >How much CHSD do you want to bridge?</label
+        >How much BONE do you want to bridge?</label
       >
-      <div class="mt-4 w-2/3 mx-auto relative rounded-md shadow-sm">
+      <div class="relative w-2/3 mx-auto mt-4 rounded-md shadow-sm">
         <div
-          class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+          class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
         >
           <span class="text-gray-500 sm:text-sm"> $ </span>
         </div>
@@ -31,28 +31,28 @@
           v-model="amount"
           name="price"
           id="price"
-          class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
+          class="block w-full pr-12 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 pl-7 sm:text-sm"
           placeholder="0.00"
           aria-describedby="price-currency"
         />
         <div
-          class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+          class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"
         >
           <span class="text-gray-500 sm:text-sm" id="price-currency">
-            CHSD
+            BONE
           </span>
         </div>
       </div>
-      <p class="text-xs mt-1">Your balance is: {{ walletBalance }}</p>
+      <p class="mt-1 text-xs">Your balance is: {{ walletBalance }}</p>
 
       <button
         type="button"
-        class="inline-flex items-center px-4 py-2 mt-4 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        class="inline-flex items-center px-4 py-2 mt-4 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         @click="sendTokens"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="m-ml-1 mr-3 h-6 w-6"
+          class="w-6 h-6 mr-3 m-ml-1"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -71,7 +71,7 @@
     </form>
     <p
       v-if="bridgedOk"
-      class="px-4 py-2 bg-blue-100 text-blue-600 border border-blue-600 rounded-lg w-2/5 mx-auto my-8"
+      class="w-2/5 px-4 py-2 mx-auto my-8 text-blue-600 bg-blue-100 border border-blue-600 rounded-lg"
     >
       Tokens sent to {{ destinationNetwork }}
     </p>

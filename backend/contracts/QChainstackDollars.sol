@@ -7,12 +7,12 @@ import "hardhat/console.sol";
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {ERC20Burnable} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 
-contract QChainstackDollars is ERC20, ERC20Burnable {
+contract qBONE is ERC20, ERC20Burnable {
     address bridge;
 
     event TokensMinted(address from, uint256 amount);
 
-    constructor(address _bridge) ERC20("QChainstackDollars", "Q-CHSD") {
+    constructor(address _bridge) ERC20("qBONE", "qBONE") {
         bridge = _bridge;
         console.log("Bridge address set to %s", _bridge);
     }
@@ -20,7 +20,7 @@ contract QChainstackDollars is ERC20, ERC20Burnable {
     modifier onlyBridge() {
         require(
             bridge == msg.sender,
-            "QChainstackDollar: only the bridge can trigger this method!"
+            "qBONE: only the bridge can trigger this method!"
         );
         _;
     }

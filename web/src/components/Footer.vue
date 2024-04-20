@@ -2,17 +2,17 @@
   <!-- This example requires Tailwind CSS v2.0+ -->
   <footer class="bg-white">
     <div
-      class="max-w-7xl mx-auto pt-8 pb-2 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8"
+      class="px-4 pt-8 pb-2 mx-auto max-w-7xl sm:px-6 md:flex md:items-center md:justify-between lg:px-8"
     >
       <div class="flex justify-center space-x-6 md:order-2">
         <a
           target="_blank"
-          href="https://twitter.com/uf4no"
+          href="https://twitter.com/DogSwapDefi"
           class="text-gray-400 hover:text-gray-500"
         >
           <span class="sr-only">Twitter</span>
           <svg
-            class="h-6 w-6"
+            class="w-6 h-6"
             fill="currentColor"
             viewBox="0 0 24 24"
             aria-hidden="true"
@@ -25,12 +25,12 @@
 
         <a
           target="_blank"
-          href="https://github.com/chainstack"
+          href="https://github.com/DogToken"
           class="text-gray-400 hover:text-gray-500"
         >
           <span class="sr-only">GitHub</span>
           <svg
-            class="h-6 w-6"
+            class="w-6 h-6"
             fill="currentColor"
             viewBox="0 0 24 24"
             aria-hidden="true"
@@ -44,16 +44,16 @@
         </a>
       </div>
       <div class="mt-8 md:mt-0 md:order-1">
-        <p class="text-center md:text-left text-base text-gray-400">
-          &copy; 2022 Created by A.Ufano for
-          <a class="hover:underline" href="https://chainstack.com"
-            >Chainstack</a
+        <p class="text-base text-center text-gray-400 md:text-left">
+          &copy; 2024 by
+          <a class="hover:underline" href="https://dogswap.online"
+            >DogSwap</a
           >
         </p>
-        <p class="text-center md:text-left text-base text-gray-400">
+        <p class="text-base text-center text-gray-400 md:text-left">
           Visit
-          <a class="hover:underline" href="https://chainstack.com"
-            >Chainstack.com</a
+          <a class="hover:underline" href="https://dogswap.online"
+            >DogSwap.Online</a
           >
         </p>
       </div>
