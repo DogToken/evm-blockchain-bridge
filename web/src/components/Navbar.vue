@@ -5,7 +5,10 @@
       <div class="flex justify-between h-16">
         <div class="flex">
           <div class="flex items-center flex-shrink-0">
-            DOGSWAP
+            <span class="mt-1 ml-4 text-lg font-bold text-white">Bridge</span>
+          </div>
+        </div>
+      </div>
     </div>
   </nav>
 </template>
