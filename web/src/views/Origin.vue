@@ -85,7 +85,7 @@ import { ethers, BigNumber } from 'ethers'
 import { useWalletStore } from '../stores/wallet'
 import WalletConnect from '@/components/WalletConnect.vue'
 
-import BONE from '@/artifacts/contracts/OriginToken.sol/BONE.json'
+import BONE from '@/artifacts/contracts/OriginToken.sol/bBONE.json'
 
 export default defineComponent({
   components: { WalletConnect },
