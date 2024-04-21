@@ -1,127 +1,139 @@
-const Web3 = require('web3');
+const Web3 = require('web3')
 
 //load env file
-require('dotenv').config();
+require('dotenv').config()
 
 const {
   mintTokens,
   approveForBurn,
   burnTokens,
   transferToEthWallet,
-} = require('./contract-methods.js');
+} = require('./contract-methods.js')
 
-const ORIGIN_TOKEN_CONTRACT_ADDRESS = process.env.ORIGIN_TOKEN_CONTRACT_ADDRESS;
-const DESTINATION_TOKEN_CONTRACT_ADDRESS = process.env.DESTINATION_TOKEN_CONTRACT_ADDRESS;
-const BRIDGE_WALLET = process.env.BRIDGE_WALLET;
-const BRIDGE_WALLET_KEY = process.env.BRIDGE_PRIV_KEY;
+const ORIGIN_TOKEN_CONTRACT_ADDRESS = process.env.ORIGIN_TOKEN_CONTRACT_ADDRESS
+const DESTINATION_TOKEN_CONTRACT_ADDRESS =
+  process.env.DESTINATION_TOKEN_CONTRACT_ADDRESS
+const BRIDGE_WALLET = process.env.BRIDGE_WALLET
 
-// Replace with your actual username and password
-const username = 'doggo';
-const password = 'ZtqXvdyNkzQ8ZEXwk7r9';
+const BRIDGE_WALLET_KEY = process.env.BRIDGE_PRIV_KEY
 
-// Create a Base64-encoded string from the username and password
-const authString = Buffer.from(`${username}:${password}`).toString('base64');
-
-const CHSD_ABIJSON = require('./ChainstackDollars.json');
-const QCHSD_ABIJSON = require('./DChainstackDollars.json');
+const BONE_ABIJSON = require('./bBone.json')
+const QBONE_ABIJSON = require('./xBone.json')
 
 const handleEthEvent = async (event, provider, contract) => {
-  console.log('handleEthEvent');
-  const { from, to, value } = event.returnValues;
-  console.log('to :>> ', to);
-  console.log('from :>> ', from);
-  console.log('value :>> ', value);
-  console.log('============================');
+  console.log('handleEthEvent')
+  const { from, to, value } = event.returnValues
+  console.log('to :>> ', to)
+  console.log('from :>> ', from)
+  console.log('value :>> ', value)
+  console.log('============================')
 
   if (from == BRIDGE_WALLET) {
-    console.log('Transfer is a bridge back');
-    return;
+    console.log('Transfer is a bridge back')
+    return
   }
   if (to == BRIDGE_WALLET && to != from) {
-    console.log('Tokens received on bridge from ETH chain! Time to bridge!');
+    console.log('Tokens received on bridge from MintMe chain! Time to bridge!')
 
     try {
-      const tokensMinted = await mintTokens(provider, contract, value, from);
-      if (!tokensMinted) return;
-      console.log('🌈🌈🌈🌈🌈 Bridge to destination completed');
+      const tokensMinted = await mintTokens(provider, contract, value, from)
+      if (!tokensMinted) return
+      console.log('🌈🌈🌈🌈🌈 Bridge to destination completed')
     } catch (err) {
-      console.error('Error processing transaction', err);
+      console.error('Error processing transaction', err)
       // TODO: return funds
     }
   } else {
-    console.log('Another transfer');
+    console.log('Another transfer')
   }
-};
+}
 
-const handleDestinationEvent = async (event, provider, contract, providerDest, contractDest) => {
-  const { from, to, value } = event.returnValues;
-  console.log('handleDestinationEvent');
-  console.log('to :>> ', to);
-  console.log('from :>> ', from);
-  console.log('value :>> ', value);
-  console.log('============================');
+const handleDestinationEvent = async (
+  event,
+  provider,
+  contract,
+  providerDest,
+  contractDest
+) => {
+  const { from, to, value } = event.returnValues
+  console.log('handleDestinationEvent')
+  console.log('to :>> ', to)
+  console.log('from :>> ', from)
+  console.log('value :>> ', value)
+  console.log('============================')
 
   if (from == process.env.WALLET_ZERO) {
-    console.log('Tokens minted');
-    return;
+    console.log('Tokens minted')
+    return
   }
 
   if (to == BRIDGE_WALLET && to != from) {
-    console.log('Tokens received on bridge from destination chain! Time to bridge back!');
+    console.log(
+      'Tokens received on bridge from Polygon chain! Time to bridge back!'
+    )
 
     try {
       // we need to approve burn, then burn
-      const tokenBurnApproved = await approveForBurn(providerDest, contractDest, value);
-      if (!tokenBurnApproved) return;
-      console.log('Tokens approved to be burnt');
-      const tokensBurnt = await burnTokens(providerDest, contractDest, value);
+      const tokenBurnApproved = await approveForBurn(
+        providerDest,
+        contractDest,
+        value
+      )
+      if (!tokenBurnApproved) return
+      console.log('Tokens approved to be burnt')
+      const tokensBurnt = await burnTokens(providerDest, contractDest, value)
 
-      if (!tokensBurnt) return;
-      console.log('Tokens burnt on destination, time to transfer tokens in ETH side');
-      const transferBack = await transferToEthWallet(provider, contract, value, from);
-      if (!transferBack) return;
+      if (!tokensBurnt) return
+      console.log(
+        'Tokens burnt on Polygon, time to transfer tokens to MintMe side'
+      )
+      const transferBack = await transferToEthWallet(
+        provider,
+        contract,
+        value,
+        from
+      )
+      if (!transferBack) return
 
-      console.log('Tokens transfered to ETH wallet');
-      console.log('🌈🌈🌈🌈🌈 Bridge back operation completed');
+      console.log('Tokens transfered to MintMe wallet')
+      console.log('🌈🌈🌈🌈🌈 Bridge back operation completed')
     } catch (err) {
-      console.error('Error processing transaction', err);
+      console.error('Error processing transaction', err)
       // TODO: return funds
     }
   } else {
-    console.log('Something else triggered Transfer event');
+    console.log('Something else triggered Transfer event')
   }
-};
+}
 
 const main = async () => {
-  const originWebSockerProvider = new Web3(process.env.ORIGIN_WSS_ENDPOINT, {
+  const originWebSockerProvider = new Web3(process.env.ORIGIN_WSS_ENDPOINT)
+  const destinationWebSockerProvider = new Web3(
+    process.env.DESTINATION_WSS_ENDPOINT,
     headers: {
-      Authorization: `Basic ${authString}`,
+        'Authorization': 'Basic  ZG9nZ286WnRxWHZkeU5relE4WkVYd2s3cjk=',
     },
-  });
-  const destinationWebSockerProvider = new Web3(process.env.DESTINATION_WSS_ENDPOINT, {
-    headers: {
-      Authorization: `Basic ${authString}`,
-    },
-  });
+  )
   // adds account to sign transactions
-  originWebSockerProvider.eth.accounts.wallet.add(BRIDGE_WALLET_KEY);
-  destinationWebSockerProvider.eth.accounts.wallet.add(BRIDGE_WALLET_KEY);
+  originWebSockerProvider.eth.accounts.wallet.add(BRIDGE_WALLET_KEY)
+  destinationWebSockerProvider.eth.accounts.wallet.add(BRIDGE_WALLET_KEY)
 
-  const oriNetworkId = await originWebSockerProvider.eth.net.getId();
-  const destNetworkId = await destinationWebSockerProvider.eth.net.getId();
+  const oriNetworkId = await originWebSockerProvider.eth.net.getId()
+  const destNetworkId = await destinationWebSockerProvider.eth.net.getId()
 
-  console.log('oriNetworkId :>> ', oriNetworkId);
-  console.log('destNetworkId :>> ', destNetworkId);
+  console.log('oriNetworkId :>> ', oriNetworkId)
+  console.log('destNetworkId :>> ', destNetworkId)
 
   const originTokenContract = new originWebSockerProvider.eth.Contract(
-    CHSD_ABIJSON.abi,
+    BONE_ABIJSON.abi,
     ORIGIN_TOKEN_CONTRACT_ADDRESS
-  );
+  )
 
-  const destinationTokenContract = new destinationWebSockerProvider.eth.Contract(
-    QCHSD_ABIJSON.abi,
-    DESTINATION_TOKEN_CONTRACT_ADDRESS
-  );
+  const destinationTokenContract =
+    new destinationWebSockerProvider.eth.Contract(
+      QBONE_ABIJSON.abi,
+      DESTINATION_TOKEN_CONTRACT_ADDRESS
+    )
 
   let options = {
     // filter: {
@@ -129,17 +141,21 @@ const main = async () => {
     // },
     // fromBlock: 0, //Number || "earliest" || "pending" || "latest"
     // toBlock: 'latest',
-  };
+  }
 
   originTokenContract.events
     .Transfer(options)
     .on('data', async (event) => {
-      await handleEthEvent(event, destinationWebSockerProvider, destinationTokenContract);
+      await handleEthEvent(
+        event,
+        destinationWebSockerProvider,
+        destinationTokenContract
+      )
     })
     .on('error', (err) => {
-      console.error('Error: ', err);
-    });
-  console.log(`Waiting for Transfer events on ${ORIGIN_TOKEN_CONTRACT_ADDRESS}`);
+      console.error('Error: ', err)
+    })
+  console.log(`Waiting for Transfer events on ${ORIGIN_TOKEN_CONTRACT_ADDRESS}`)
 
   destinationTokenContract.events
     .Transfer(options)
@@ -150,13 +166,15 @@ const main = async () => {
         originTokenContract,
         destinationWebSockerProvider,
         destinationTokenContract
-      );
+      )
     })
     .on('error', (err) => {
-      console.error('Error: ', err);
-    });
+      console.error('Error: ', err)
+    })
 
-  console.log(`Waiting for Transfer events on ${DESTINATION_TOKEN_CONTRACT_ADDRESS}`);
-};
+  console.log(
+    `Waiting for Transfer events on ${DESTINATION_TOKEN_CONTRACT_ADDRESS}`
+  )
+}
 
-main();
+main()
