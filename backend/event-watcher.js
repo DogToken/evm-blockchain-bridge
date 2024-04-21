@@ -107,21 +107,29 @@ const handleDestinationEvent = async (
 }
 
 const main = async () => {
-  const originWebSockerProvider = new Web3(process.env.ORIGIN_WSS_ENDPOINT)
-  const destinationWebSockerProvider = new Web3(
-    process.env.DESTINATION_WSS_ENDPOINT
-  )
-  // adds account to sign transactions
-  originWebSockerProvider.eth.accounts.wallet.add(BRIDGE_WALLET_KEY)
-  destinationWebSockerProvider.eth.accounts.wallet.add(BRIDGE_WALLET_KEY)
+  const originWebSocketProvider = new Web3.providers.WebsocketProvider('wss://node.1000x.ch/ws', {
+    headers: {
+      'Authorization': 'Basic ZG9nZ286WnRxWHZkeU5relE4WkVYd2s3cjk='
+    },
+    clientConfig: {
+      keepalive: true,
+      keepaliveInterval: 60000
+    }
+  });
+  const originWeb3 = new Web3(originWebSocketProvider);
+  originWeb3.eth.accounts.wallet.add(BRIDGE_WALLET_KEY);
 
-  const oriNetworkId = await originWebSockerProvider.eth.net.getId()
-  const destNetworkId = await destinationWebSockerProvider.eth.net.getId()
+  const destinationWebSocketProvider = new Web3.providers.WebsocketProvider(process.env.DESTINATION_WSS_ENDPOINT);
+  const destinationWeb3 = new Web3(destinationWebSocketProvider);
+  destinationWeb3.eth.accounts.wallet.add(BRIDGE_WALLET_KEY);
+
+  const oriNetworkId = await originWebSocketProvider.eth.net.getId()
+  const destNetworkId = await destinationWebSocketProvider.eth.net.getId()
 
   console.log('oriNetworkId :>> ', oriNetworkId)
   console.log('destNetworkId :>> ', destNetworkId)
 
-  const originTokenContract = new originWebSockerProvider.eth.Contract(
+  const originTokenContract = new originWebSocketProvider.eth.Contract(
     bBone.abi,
     ORIGIN_TOKEN_CONTRACT_ADDRESS
   )
@@ -159,7 +167,7 @@ const main = async () => {
     .on('data', async (event) => {
       await handleDestinationEvent(
         event,
-        originWebSockerProvider,
+        originWebSocketProvider,
         originTokenContract,
         destinationWebSockerProvider,
         destinationTokenContract
