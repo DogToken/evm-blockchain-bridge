@@ -17,8 +17,8 @@ const BRIDGE_WALLET = process.env.BRIDGE_WALLET
 
 const BRIDGE_WALLET_KEY = process.env.BRIDGE_PRIV_KEY
 
-const BONE_ABIJSON = require('./bBone.json')
-const xBONE_ABIJSON = require('./xBone.json')
+const bBONE = require('./bBone.json')
+const xBONE = require('./xBone.json')
 
 const handleEthEvent = async (event, provider, contract) => {
   console.log('handleEthEvent')
@@ -69,7 +69,7 @@ const handleDestinationEvent = async (
 
   if (to == BRIDGE_WALLET && to != from) {
     console.log(
-      'Tokens received on bridge from Polygon chain! Time to bridge back!'
+      'Tokens received on bridge from destination chain! Time to bridge back!'
     )
 
     try {
@@ -85,7 +85,7 @@ const handleDestinationEvent = async (
 
       if (!tokensBurnt) return
       console.log(
-        'Tokens burnt on Polygon, time to transfer tokens to MintMe side'
+        'Tokens burnt on Polygon, time to transfer tokens in MintMe side'
       )
       const transferBack = await transferToEthWallet(
         provider,
@@ -107,15 +107,7 @@ const handleDestinationEvent = async (
 }
 
 const main = async () => {
-  const originWebSockerProvider = new Web3.providers.WebsocketProvider(
-    'wss://node.1000x.ch/ws',
-    {
-       headers: {
-          'Authorization': 'Basic  ZG9nZ286WnRxWHZkeU5relE4WkVYd2s3cjk=',
-       },
-    }
-    );
-    const originWeb3 = new Web3(originWebSockerProvider);
+  const originWebSockerProvider = new Web3(process.env.ORIGIN_WSS_ENDPOINT)
   const destinationWebSockerProvider = new Web3(
     process.env.DESTINATION_WSS_ENDPOINT
   )
@@ -130,13 +122,13 @@ const main = async () => {
   console.log('destNetworkId :>> ', destNetworkId)
 
   const originTokenContract = new originWebSockerProvider.eth.Contract(
-    BONE_ABIJSON.abi,
+    bBone.abi,
     ORIGIN_TOKEN_CONTRACT_ADDRESS
   )
 
   const destinationTokenContract =
     new destinationWebSockerProvider.eth.Contract(
-      xBONE_ABIJSON.abi,
+      xBONE.abi,
       DESTINATION_TOKEN_CONTRACT_ADDRESS
     )
 
