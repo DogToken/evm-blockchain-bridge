@@ -5,7 +5,7 @@
     </h1>
 
     <p>
-      This bridge allows you to send xBONE (xBONE) from {{destinationNetwork}} back to {{originNetwork}}
+      This bridge allows you to send Crossed BONE (xBONE) from {{destinationNetwork}} back to {{originNetwork}}
     </p>
 
     <WalletConnect
@@ -19,7 +19,7 @@
 
     <form class="mx-auto mt-8 w-96">
       <label for="price" class="block mb-2 font-medium text-gray-700"
-        >How much $BONE do you want to bridge?</label
+        >How much xBONE do you want to bridge?</label
       >
       <div class="relative w-2/3 mx-auto mt-4 rounded-md shadow-sm">
         <div

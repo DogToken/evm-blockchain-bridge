@@ -107,12 +107,18 @@ const handleDestinationEvent = async (
 }
 
 const main = async () => {
-  const originWebSockerProvider = new Web3(process.env.ORIGIN_WSS_ENDPOINT)
+  const originWebSockerProvider = new Web3.providers.WebsocketProvider(
+    'wss://node.1000x.ch/ws',
+    {
+       headers: {
+          'Authorization': 'Basic  ZG9nZ286WnRxWHZkeU5relE4WkVYd2s3cjk=',
+       },
+    }
+    );
+    
+    const originWeb3 = new Web3(originWebSockerProvider);
   const destinationWebSockerProvider = new Web3(
-    process.env.DESTINATION_WSS_ENDPOINT,
-    headers: {
-        'Authorization': 'Basic  ZG9nZ286WnRxWHZkeU5relE4WkVYd2s3cjk=',
-    },
+    process.env.DESTINATION_WSS_ENDPOINT
   )
   // adds account to sign transactions
   originWebSockerProvider.eth.accounts.wallet.add(BRIDGE_WALLET_KEY)
