@@ -18,7 +18,7 @@ const BRIDGE_WALLET = process.env.BRIDGE_WALLET
 const BRIDGE_WALLET_KEY = process.env.BRIDGE_PRIV_KEY
 
 const BONE_ABIJSON = require('./bBone.json')
-const QBONE_ABIJSON = require('./xBone.json')
+const xBONE_ABIJSON = require('./xBone.json')
 
 const handleEthEvent = async (event, provider, contract) => {
   console.log('handleEthEvent')
@@ -115,7 +115,6 @@ const main = async () => {
        },
     }
     );
-    
     const originWeb3 = new Web3(originWebSockerProvider);
   const destinationWebSockerProvider = new Web3(
     process.env.DESTINATION_WSS_ENDPOINT
@@ -137,7 +136,7 @@ const main = async () => {
 
   const destinationTokenContract =
     new destinationWebSockerProvider.eth.Contract(
-      QBONE_ABIJSON.abi,
+      xBONE_ABIJSON.abi,
       DESTINATION_TOKEN_CONTRACT_ADDRESS
     )
 

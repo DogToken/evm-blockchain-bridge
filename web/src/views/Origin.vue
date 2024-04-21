@@ -85,7 +85,7 @@ import { ethers, BigNumber } from 'ethers'
 import { useWalletStore } from '../stores/wallet'
 import WalletConnect from '@/components/WalletConnect.vue'
 
-import ChainstackDollars from '@/artifacts/contracts/OriginToken.sol/ChainstackDollars.json'
+import BONE from '@/artifacts/contracts/OriginToken.sol/BONE.json'
 
 export default defineComponent({
   components: { WalletConnect },
@@ -111,7 +111,7 @@ export default defineComponent({
 
     let contract = new ethers.Contract(
       originTokenAddress,
-      ChainstackDollars.abi,
+      BONE.abi,
       signer
     )
 
