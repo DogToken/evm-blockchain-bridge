@@ -12,9 +12,9 @@ const {
 
 let tokenFactory, BONEContract, owner, user1, user2, user3
 
-const NAME = 'BONE'
-const SYMBOL = 'CHSD'
-const TOTAL_SUPPLY = '100'
+const NAME = 'Bridged BONE'
+const SYMBOL = 'bBONE'
+const TOTAL_SUPPLY = '10000000'
 const TOTAL_SUPPLY_DECIMALS = '100000000000000000000'
 
 // Start test block

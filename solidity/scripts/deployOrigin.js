@@ -9,7 +9,7 @@ const main = async () => {
   let contract = await contractFactory.deploy(
     'Bridged BONE',
     'bBONE',
-    0
+    10000000
   )
 
   await contract.deployed()
