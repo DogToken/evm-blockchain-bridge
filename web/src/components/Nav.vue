@@ -1,29 +1,29 @@
 <template>
   <div
-    class="flex flex-wrap items-center justify-around md:justify-center my-8"
+    class="flex flex-wrap items-center justify-around my-8 md:justify-center"
   >
     <router-link
       :to="{ name: 'Home' }"
-      class="border border-blue-600 block mr-0 md:mr-4 px-3 py-2 rounded-md text-base font-medium"
+      class="block px-3 py-2 mr-0 text-base font-medium border border-blue-600 rounded-md md:mr-4"
       :class="
         $route.name == 'Home'
           ? 'bg-blue-600 text-white b'
           : 'bg-blue-100 text-blue-800 '
       "
       aria-current="page"
-      >Bridge to Destination Chain</router-link
+      >Bridge to Polygon</router-link
     >
 
     <router-link
       :to="{ name: 'Destination' }"
-      class="border border-teal-600 block px-3 py-2 rounded-md text-base font-medium"
+      class="block px-3 py-2 text-base font-medium border border-teal-600 rounded-md"
       :class="
         $route.name == 'Destination'
           ? 'bg-teal-600 text-white'
           : 'bg-teal-100 text-teal-800'
       "
       aria-current="page"
-      >Send token back to Original Chain</router-link
+      >Send token back to MintMe</router-link
     >
   </div>
 </template>
