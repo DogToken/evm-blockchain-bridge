@@ -7,25 +7,21 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Home',
     component: Home,
   },
-
   {
     path: '/bridge-back',
     name: 'Destination',
-
     component: () => import('../views/Destination.vue'),
   },
-
-  // TODO: for 404 errors
-  // {
-  //   path: '/:catchAll(.*)',
-  //   component: NotFoundComponent,
-  //   name: 'NotFound',
-  // },
+  // Catch-all route for 404 pages
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('../components/NotFound.vue'),
+  },
 ]
 
 const router = createRouter({
   history: createWebHistory(),
-
   routes,
 })
 
