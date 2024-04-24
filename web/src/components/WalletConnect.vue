@@ -95,27 +95,24 @@ export default defineComponent({
     }
 
     const addNetwork = async () => {
-  const nativeCurrencySymbol = props.currency || 'MATIC'; // Set a default value if props.currency is falsy
-
-  await window.ethereum.request({
-    method: 'wallet_addEthereumChain',
-    params: [
-      {
-        chainId: props.targetNetworkId,
-        chainName: props.targetNetwork,
-        rpcUrls: [import.meta.env.VITE_DESTINATION_NETWORK_RPC],
-        nativeCurrency: {
-          name: props.currency,
-          symbol: nativeCurrencySymbol, // Use the nativeCurrencySymbol variable
-          decimals: props.decimals,
-        },
-      },
-    ],
-  });
-
-  // refresh
-  window.location.reload();
-}
+      await window.ethereum.request({
+        method: 'wallet_addEthereumChain',
+        params: [
+          {
+            chainId: props.targetNetworkId,
+            chainName: props.targetNetwork,
+            rpcUrls: [import.meta.env.VITE_DESTINATION_NETWORK_RPC],
+            nativeCurrency: {
+              name: props.currency,
+              symbol: props.currency, // 2-6 characters long
+              decimals: props.decimals,
+            },
+          },
+        ],
+      })
+      // refresh
+      window.location.reload()
+    }
     // switches network to the one provided in env variable
     const switchNetwork = async () => {
       await window.ethereum.request({
