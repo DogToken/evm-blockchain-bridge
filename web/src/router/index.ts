@@ -16,11 +16,11 @@ const routes: Array<RouteRecordRaw> = [
   },
 
   // TODO: for 404 errors
-  // {
-  //   path: '/:catchAll(.*)',
-  //   component: NotFoundComponent,
-  //   name: 'NotFound',
-  // },
+{
+  path: '/:catchAll(.*)',
+  component: () => import('../views/Origin.vue'), // Replace with your desired fallback component
+  name: 'Home',
+},
 ]
 
 const router = createRouter({
