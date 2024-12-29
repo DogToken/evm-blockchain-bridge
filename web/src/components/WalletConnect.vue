@@ -95,7 +95,7 @@ export default defineComponent({
     }
 
     const addNetwork = async () => {
-  const nativeCurrencySymbol = props.currency || 'MATIC'; // Set a default value if props.currency is falsy
+  const nativeCurrencySymbol = props.currency || 'POL'; // Set a default value if props.currency is falsy
 
   await window.ethereum.request({
     method: 'wallet_addEthereumChain',
