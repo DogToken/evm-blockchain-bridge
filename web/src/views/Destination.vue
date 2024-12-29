@@ -12,7 +12,7 @@
       class="my-4"
       :targetNetwork="destinationNetwork"
       :targetNetworkId="destinationNetworkId"
-      :currency="POL"
+      :currency="MATIC"
       :decimals="18"
       :isNewNetwork="true"
     />
