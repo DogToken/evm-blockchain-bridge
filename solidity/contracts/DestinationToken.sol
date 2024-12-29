@@ -10,7 +10,7 @@ import {ERC20Burnable} from "@openzeppelin/contracts/token/ERC20/extensions/ERC2
 contract xBONE is ERC20, ERC20Burnable {
     address bridge;
 
-    constructor(address _bridge) ERC20("Cross BONE", "xBONE") {
+    constructor(address _bridge) ERC20("BONE", "BONE") {
         bridge = _bridge;
     }
 

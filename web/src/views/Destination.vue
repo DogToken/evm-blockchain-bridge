@@ -5,21 +5,21 @@
     </h1>
 
     <p>
-      This bridge allows you to send Crossed BONE (xBONE) from {{destinationNetwork}} back to {{originNetwork}}
+      This bridge allows you to send BONE from {{destinationNetwork}} back to {{originNetwork}}
     </p>
 
     <WalletConnect
       class="my-4"
       :targetNetwork="destinationNetwork"
       :targetNetworkId="destinationNetworkId"
-      :currency="MATIC"
+      :currency="POL"
       :decimals="18"
       :isNewNetwork="true"
     />
 
     <form class="mx-auto mt-8 w-96">
       <label for="price" class="block mb-2 font-medium text-gray-700"
-        >How much xBONE do you want to bridge?</label
+        >How much BONE do you want to bridge?</label
       >
       <div class="relative w-2/3 mx-auto mt-4 rounded-md shadow-sm">
         <div
@@ -40,7 +40,7 @@
           class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"
         >
           <span class="text-gray-500 sm:text-sm" id="price-currency">
-            xBONE
+            BONE
           </span>
         </div>
       </div>
@@ -79,7 +79,7 @@ import { useWalletStore } from '../stores/wallet'
 import WalletConnect from '@/components/WalletConnect.vue'
 
 import xBONE from '@/artifacts/contracts/DestinationToken.sol/xBONE.json'
-import BONE from '@/artifacts/contracts/OriginToken.sol/bBONE.json'
+import BONE from '@/artifacts/contracts/OriginToken.sol/BONE.json'
 
 export default defineComponent({
   components: { WalletConnect },

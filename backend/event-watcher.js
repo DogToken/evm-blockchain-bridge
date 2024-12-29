@@ -17,7 +17,7 @@ const BRIDGE_WALLET = process.env.BRIDGE_WALLET
 
 const BRIDGE_WALLET_KEY = process.env.BRIDGE_PRIV_KEY
 
-const BONE_ABIJSON = require('./bBone.json')
+const BONE_ABIJSON = require('./Bone.json')
 const XBONE_ABIJSON = require('./xBone.json')
 
 const handleEthEvent = async (event, provider, contract) => {

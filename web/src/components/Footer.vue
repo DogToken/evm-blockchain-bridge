@@ -7,10 +7,10 @@
       <div class="flex justify-center space-x-6 md:order-2">
         <a
           target="_blank"
-          href="https://twitter.com/DogSwapDefi"
+          href="https://x.com/DogSwapDefi"
           class="text-gray-400 hover:text-gray-500"
         >
-          <span class="sr-only">Twitter</span>
+          <span class="sr-only">X</span>
           <svg
             class="w-6 h-6"
             fill="currentColor"
@@ -53,7 +53,7 @@
         <p class="text-base text-center text-gray-400 md:text-left">
           Visit
           <a class="hover:underline" href="https://dogswap.online"
-            >DogSwap.Online</a
+            >DogSwap.xyz</a
           >
         </p>
       </div>

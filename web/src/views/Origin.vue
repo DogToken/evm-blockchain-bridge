@@ -5,7 +5,7 @@
     </h1>
 
     <p>
-      This bridge allows you to send Bridged BONE (bBONE) from {{originNetwork}} to {{destinationNetwork}}
+      This bridge allows you to send BONE from {{originNetwork}} to {{destinationNetwork}}
     </p>
 
     <WalletConnect
@@ -18,7 +18,7 @@
 
     <form class="mx-auto mt-8 w-96">
       <label for="price" class="block mb-2 font-medium text-gray-700"
-        >How much bBONE do you want to bridge?</label
+        >How much BONE do you want to bridge?</label
       >
       <div class="relative w-2/3 mx-auto mt-4 rounded-md shadow-sm">
         <div
@@ -39,7 +39,7 @@
           class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"
         >
           <span class="text-gray-500 sm:text-sm" id="price-currency">
-            bBONE
+            BONE
           </span>
         </div>
       </div>
@@ -85,7 +85,7 @@ import { ethers, BigNumber } from 'ethers'
 import { useWalletStore } from '../stores/wallet'
 import WalletConnect from '@/components/WalletConnect.vue'
 
-import BONE from '@/artifacts/contracts/OriginToken.sol/bBONE.json'
+import BONE from '@/artifacts/contracts/OriginToken.sol/BONE.json'
 
 export default defineComponent({
   components: { WalletConnect },
