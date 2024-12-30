@@ -46,13 +46,13 @@
       <div class="mt-8 md:mt-0 md:order-1">
         <p class="text-base text-center text-gray-400 md:text-left">
           &copy; 2024 by
-          <a class="hover:underline" href="https://dogswap.online"
+          <a class="hover:underline" href="https://dogswap.xyz"
             >DogSwap</a
           >
         </p>
         <p class="text-base text-center text-gray-400 md:text-left">
           Visit
-          <a class="hover:underline" href="https://dogswap.online"
+          <a class="hover:underline" href="https://dogswap.xyz"
             >DogSwap.xyz</a
           >
         </p>
